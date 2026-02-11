@@ -1,0 +1,54 @@
+http:
+  routers:
+    scraper:
+      rule: "Host(`scraper.hetzner.cwwk.cloud`)"
+      service: scraper
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: letsencrypt
+
+    bewerber:
+      rule: "Host(`bewerber.hetzner.cwwk.cloud`)"
+      service: bewerber
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: letsencrypt
+
+    cv:
+      rule: "Host(`cv.hetzner.cwwk.cloud`)"
+      service: cv
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: letsencrypt
+
+    cadvisor:
+      rule: "Host(`cadvisor.hetzner.cwwk.cloud`)"
+      service: cadvisor
+      entryPoints:
+        - websecure
+      tls:
+        certResolver: letsencrypt
+
+  services:
+    scraper:
+      loadBalancer:
+        servers:
+          - url: "http://scraper:3000"
+
+    bewerber:
+      loadBalancer:
+        servers:
+          - url: "http://auto-bewerber:3001"
+
+    cv:
+      loadBalancer:
+        servers:
+          - url: "http://cv-service:3002"
+
+    cadvisor:
+      loadBalancer:
+        servers:
+          - url: "http://cadvisor:8080"
