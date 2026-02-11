@@ -1,36 +1,62 @@
 http:
   routers:
     scraper:
-      rule: "Host(`scraper.hetzner.cwwk.cloud`)"
+      rule: "Host(`hetzner.cwwk.cloud`) && PathPrefix(`/scraper`)"
       service: scraper
       entryPoints:
         - websecure
       tls:
         certResolver: letsencrypt
+      middlewares:
+        - scraper-strip
 
     bewerber:
-      rule: "Host(`bewerber.hetzner.cwwk.cloud`)"
+      rule: "Host(`hetzner.cwwk.cloud`) && PathPrefix(`/bewerber`)"
       service: bewerber
       entryPoints:
         - websecure
       tls:
         certResolver: letsencrypt
+      middlewares:
+        - bewerber-strip
 
     cv:
-      rule: "Host(`cv.hetzner.cwwk.cloud`)"
+      rule: "Host(`hetzner.cwwk.cloud`) && PathPrefix(`/cv`)"
       service: cv
       entryPoints:
         - websecure
       tls:
         certResolver: letsencrypt
+      middlewares:
+        - cv-strip
 
     cadvisor:
-      rule: "Host(`cadvisor.hetzner.cwwk.cloud`)"
+      rule: "Host(`hetzner.cwwk.cloud`) && PathPrefix(`/cadvisor`)"
       service: cadvisor
       entryPoints:
         - websecure
       tls:
         certResolver: letsencrypt
+      middlewares:
+        - cadvisor-strip
+
+  middlewares:
+    scraper-strip:
+      stripPrefix:
+        prefixes:
+          - "/scraper"
+    bewerber-strip:
+      stripPrefix:
+        prefixes:
+          - "/bewerber"
+    cv-strip:
+      stripPrefix:
+        prefixes:
+          - "/cv"
+    cadvisor-strip:
+      stripPrefix:
+        prefixes:
+          - "/cadvisor"
 
   services:
     scraper:
