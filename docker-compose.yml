@@ -27,7 +27,7 @@ services:
       - "traefik.http.routers.dashboard.tls.certresolver=letsencrypt"
       # Basic Auth for Dashboard
       - "traefik.http.routers.dashboard.middlewares=auth"
-      - "traefik.http.middlewares.auth.basicauth.users=admin:$$apr1$$ruca84Hq$$mbjdMZBAG.KWn7vfN/SNK/"
+      - "traefik.http.middlewares.auth.basicauth.users=admin:$$apr1$$xiu34xXh$$1tsq4YtZJvKvOT6szVcqu."
 
 networks:
   traefik:
