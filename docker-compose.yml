@@ -21,7 +21,7 @@ services:
     labels:
       # Dashboard
       - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=Host(`traefik.hetzner.cwwk.cloud`)"
+      - "traefik.http.routers.dashboard.rule=Host(`hetzner.cwwk.cloud`)"
       - "traefik.http.routers.dashboard.service=api@internal"
       - "traefik.http.routers.dashboard.entrypoints=websecure"
       - "traefik.http.routers.dashboard.tls.certresolver=letsencrypt"
