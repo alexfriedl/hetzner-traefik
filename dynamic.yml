@@ -16,6 +16,8 @@ http:
         - websecure
       tls:
         certResolver: letsencrypt
+      middlewares:
+        - basic-auth
       priority: 20
 
     cv:
@@ -27,6 +29,7 @@ http:
         certResolver: letsencrypt
       middlewares:
         - cv-strip
+        - basic-auth
       priority: 10
 
     bewerber:
@@ -38,6 +41,7 @@ http:
         certResolver: letsencrypt
       middlewares:
         - bewerber-strip
+        - basic-auth
       priority: 10
 
     cadvisor:
@@ -47,8 +51,8 @@ http:
         - websecure
       tls:
         certResolver: letsencrypt
-      # middlewares:
-        # - cadvisor-strip
+      middlewares:
+        - basic-auth
       priority: 10
 
     scraper:
@@ -58,9 +62,15 @@ http:
         - websecure
       tls:
         certResolver: letsencrypt
+      middlewares:
+        - basic-auth
       priority: 1
 
   middlewares:
+    basic-auth:
+      basicAuth:
+        users:
+          - "alex:$apr1$MDscl6wF$LKJsgIc0e1Rq5BseJVNLw/"
     bewerber-strip:
       stripPrefix:
         prefixes:
